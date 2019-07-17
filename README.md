@@ -9,7 +9,7 @@
     - models: hold on all our DB models
     - routes: hold on the service routes
     - services: hold on the main classes that hold our logic
-- bootstrab: files for init the application
+- bootstrap: files for init the application
 - config: application congiguration (app, database, queues, ... etc)
 - database
     - migrations: hold on all database migration files
