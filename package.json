@@ -9,8 +9,8 @@
   "scripts": {
     "dev": "nodemon",
     "ts-node": "ts-node",
-    "build": "tsc",
-    "start": "",
+    "build": "rm -rf dist && tsc",
+    "start": "node ./dist/bootstrap/bootstrap.js",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts"
   },
   "engines": {
@@ -21,13 +21,16 @@
   "license": "MIT",
   "dependencies": {
     "fastify": "^2.6.0",
-    "mongoose": "^5.3.15"
+    "fastify-plugin": "^1.6.0",
+    "mongoose": "^5.3.15",
+    "source-map-support": "^0.5.12"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
     "@types/mongodb": "^3.1.15",
     "@types/mongoose": "^5.5.8",
+    "@types/source-map-support": "^0.5.0",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "nodemon": "^1.19.1",

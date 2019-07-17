@@ -1,5 +1,5 @@
 import { RouterInterface } from '../interfaces/RouterInterface';
-import { ExampleRouter } from './example';
+import { ExampleRouter } from './example.routes';
 import { FastifyInstance } from 'fastify';
 
 const routes: { [index: string]: RouterInterface; } = {

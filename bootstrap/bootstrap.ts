@@ -1,20 +1,37 @@
+import * as sourceMapSupport from 'source-map-support';
+sourceMapSupport.install();
+
 import * as fastify from 'fastify';
 import { Routes } from '../app/routes';
-import { Server, IncomingMessage, ServerResponse } from 'http'
+import { Server, IncomingMessage, ServerResponse } from 'http';
 import { AppConfig } from '../config/app';
+import DB from './database';
 
 const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({
     logger: true
-})
+});
 
 const routes = new Routes();
 
-server.register(routes.load.bind(routes))
+server.register(DB);
+server.register(routes.load.bind(routes));
 
-server.listen(AppConfig.port, (err, address) => {
-    if (err) {
-        server.log.error(err)
-        process.exit(1)
+const start = async () => {
+    try {
+        const address = await server.listen(AppConfig.port);
+        server.log.info(`server listening on ${address}`)
+    } catch (err) {
+        console.log(err);
+        server.log.error(err);
+        process.exit(1);
     }
-    server.log.info(`server listening on ${address}`)
-})
+};
+
+process.on("uncaughtException", error => {
+    console.error(error);
+});
+process.on("unhandledRejection", error => {
+    console.error(error);
+});
+
+start();

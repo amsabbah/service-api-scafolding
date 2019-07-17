@@ -1,5 +1,6 @@
 import { FastifyInstance, RouteShorthandOptions } from 'fastify';
 import { RouterInterface } from '../interfaces/RouterInterface';
+import { ExampleController } from '../controllers/Example.controller';
 
 const opts: RouteShorthandOptions = {
     schema: {
@@ -18,10 +19,8 @@ const opts: RouteShorthandOptions = {
 
 export class ExampleRouter implements RouterInterface {
 
-    async load(server: FastifyInstance, options: any) {
-        server.get('/ping', opts, async (request, reply) => {
-            return { pong: 'it works' }
-        })
+    async load(server: FastifyInstance, options: Object) {
+        server.get('/ping', opts, ExampleController.pingRouteHandler);
     }
 
 }
